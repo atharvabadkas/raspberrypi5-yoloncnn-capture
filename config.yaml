@@ -1,0 +1,81 @@
+system:
+  name: WMSV4AI
+  version: 1.0.0
+  log_level: DEBUG
+  save_dir: images
+  enable_debug: true
+  gpu_enabled: false
+  num_threads: 4
+  max_queue_size: 40
+
+camera:
+  width: 640
+  height: 480
+  fps: 7
+  format: RGB888
+  rotation: 0
+  camera_id: 0
+  auto_exposure: true
+  exposure_compensation: 0
+  white_balance: auto
+
+detector:
+  enabled: true
+  model_param_path: models/yolov8n.param
+  model_bin_path: models/yolov8n.bin
+  class_file: models/coco.names
+  conf_threshold: 0.3
+  nms_threshold: 0.45
+  input_width: 416
+  input_height: 416
+  use_fp16: true
+  num_threads: 4
+  max_detections: 10
+
+image_quality:
+  enabled: true
+  min_brightness: 40
+  max_brightness: 220
+  blur_threshold: 80
+  min_contrast: 50
+  weight_blur: 0.4
+  weight_brightness: 0.2
+  weight_contrast: 0.2
+  weight_saturation: 0.1
+  weight_exposure: 0.1
+  save_all_frames: true
+  save_good_frames: true
+  save_debug_frames: false
+
+frame_selector:
+  enabled: true
+  buffer_size: 5
+  min_quality_score: 0.3
+  selection_interval: 0.1
+  select_best_frame: true
+
+# Performance metrics configuration
+metrics:
+  enabled: true
+  history_size: 100
+  reporting_interval: 5.0
+  log_to_file: true
+  monitor_threads: true
+  monitor_system: true
+  monitor_gpu: false
+  temperature_warning: 75
+  cpu_usage_warning: 90
+  memory_usage_warning: 90
+
+# Image storage configuration
+image_storage:
+  base_dir: images
+  storage_mode: by_date     # Options: flat, by_date, by_quality, by_class
+  format: jpeg              # Options: jpeg, png, bmp, tiff
+  jpeg_quality: 95
+  file_prefix: img
+  save_metadata: true
+  auto_cleanup: true
+  cleanup_age_days: 30
+  cleanup_min_quality: 0.7
+  max_storage_gb: 10.0
